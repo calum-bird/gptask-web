@@ -6,7 +6,7 @@ import { HeartIcon } from "@heroicons/react/20/solid";
 import { UserButton } from "@clerk/nextjs";
 
 const navigation = [
-  { name: "Dashboard", href: "/" },
+  { name: "Dashboard", href: "/dashboard" },
   { name: "Prompts", href: "/prompts" },
   { name: "History", href: "/history" },
 ];

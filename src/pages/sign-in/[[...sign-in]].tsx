@@ -4,7 +4,7 @@ import { SignIn } from "@clerk/nextjs";
 export default function Page() {
   return (
     <Hero>
-      <SignIn />
+      <SignIn redirectUrl={"/dashboard"} />
     </Hero>
   );
 }

@@ -167,7 +167,7 @@ export default function Hero(props: HeroProps) {
                 />
                 <div className="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0">
                   <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
-                    {isLoggingIn ? children : <DemoScreen />}
+                    {children}
                   </div>
                 </div>
               </div>

@@ -1,7 +1,21 @@
 import Head from "next/head";
 import Layout from "@/components/layout";
+import { Prompt } from "@/types";
+import { useEffect, useState } from "react";
+import { getPrompts } from "@/lib/client/crud";
+import PromptList from "@/components/PromptList";
+import NewPrompt from "@/components/NewPrompt";
 
-export default function Home() {
+export default function PromptsPage() {
+  const [prompts, setPrompts] = useState<Prompt[]>([]);
+
+  useEffect(() => {
+    getPrompts().then((prompts) => {
+      console.log("Retrieved prompts:", prompts);
+      setPrompts(prompts);
+    });
+  }, []);
+
   return (
     <>
       <Head>
@@ -11,10 +25,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="flex flex-col justify-center items-center">
-          <h1 className="text-4xl font-bold text-gray-900">
-            Prompt management coming soon!
-          </h1>
+        <div className="flex flex-col justify-center items-start">
+          <div className="mt-8 w-full max-w-2xl">
+            {prompts.length > 0 ? (
+              <PromptList prompts={prompts} />
+            ) : (
+              <NewPrompt />
+            )}
+          </div>
         </div>
       </Layout>
     </>
