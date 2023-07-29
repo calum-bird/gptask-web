@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 import Hero from "@/components/hero";
 import { HeartIcon } from "@heroicons/react/20/solid";
 

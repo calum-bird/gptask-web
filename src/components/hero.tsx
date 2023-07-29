@@ -3,35 +3,35 @@ import { useState } from "react";
 
 const codeSnippets = [
   `import { useState } from 'react'
-  import { Switch } from '@headlessui/react'
-  
-  function Example() {
-    const [enabled, setEnabled] = useState(true)
-  
-    return (
-      <form action="/notification-settings" method="post">
-        <Switch checked={enabled} onChange={setEnabled} name="notifications">
-          {/* ... */}
-        </Switch>
-        <button>Submit</button>
-      </form>
-    )
-  }`,
+import { Switch } from '@headlessui/react'
+
+function Example() {
+  const [enabled, setEnabled] = useState(true)
+
+  return (
+    <form action="/notification-settings" method="post">
+      <Switch checked={enabled} onChange={setEnabled} name="notifications">
+        {/* ... */}
+      </Switch>
+      <button>Submit</button>
+    </form>
+  )
+}`,
   `import { useState } from 'react'
-  import { Switch } from '@headlessui/react'
+import { Switch } from '@headlessui/react'
+
+function Example() {
+  const [enabled, setEnabled] = useState<boolean>(true)
   
-  function Example() {
-    const [enabled, setEnabled] = useState<boolean>(true)
-    
-    return (
-      <form action="/notification-settings" method="post">
-        <Switch checked={enabled} onChange={setEnabled} name="notifications">
-          {/* ... */}
-        </Switch>
-        <button>Submit</button>
-      </form>
-    )
-  }`,
+  return (
+    <form action="/notification-settings" method="post">
+      <Switch checked={enabled} onChange={setEnabled} name="notifications">
+        {/* ... */}
+      </Switch>
+      <button>Submit</button>
+    </form>
+  )
+}`,
 ];
 const tabs = [
   {
@@ -52,13 +52,16 @@ type CodeTabProps = {
 function CodeTab(props: CodeTabProps) {
   const { isActive, name, onClick } = props;
 
-  return (
+  return isActive ? (
     <div
-      className={
-        "border-r border-gray-600/10 px-4 py-2 " + isActive
-          ? "border-b border-b-white/20 border-r-white/10 bg-white/5 text-white"
-          : "text-gray-400"
-      }
+      className="border-b border-r border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white cursor-pointer"
+      onClick={onClick}
+    >
+      {name}
+    </div>
+  ) : (
+    <div
+      className="border-r border-gray-600/10 px-4 py-2  cursor-pointer"
       onClick={onClick}
     >
       {name}
