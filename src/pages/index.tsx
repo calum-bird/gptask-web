@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Hero from "@/components/hero";
 import { HeartIcon } from "@heroicons/react/20/solid";
 
 export default function Home() {
@@ -11,7 +10,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Hero />
       <div className="max-w-7xl mx-auto w-full">
         <p className="text-center text-gray-700 text-lg">
           Built with{" "}

@@ -69,8 +69,38 @@ function CodeTab(props: CodeTabProps) {
   );
 }
 
-export default function Hero() {
+function DemoScreen() {
   const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <div className="w-screen overflow-hidden rounded-tl-xl bg-gray-900">
+      <div className="flex bg-gray-800/40 ring-1 ring-white/5">
+        <div className="-mb-px flex text-sm font-medium leading-6 text-gray-400">
+          {tabs.map((tab, index) => (
+            <CodeTab
+              isActive={activeTab === index}
+              key={index}
+              onClick={() => setActiveTab(index)}
+              name={tab.name}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="px-6 pb-14 pt-6">
+        <pre className="text-sm text-gray-300">
+          <code>{tabs[activeTab].code}</code>
+        </pre>
+      </div>
+    </div>
+  );
+}
+
+type HeroProps = {
+  children: React.ReactNode;
+};
+export default function Hero(props: HeroProps) {
+  const { children } = props;
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   return (
     <div className="bg-white">
@@ -82,7 +112,7 @@ export default function Hero() {
                 <img
                   className="h-11"
                   src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt="Your Company"
+                  alt="GPTask"
                 />
                 <div className="mt-24 sm:mt-32 lg:mt-16">
                   <a
@@ -114,10 +144,11 @@ export default function Hero() {
                 </p>
                 <div className="mt-10 flex items-center gap-x-6">
                   <a
-                    href="#"
-                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    onClick={() => setIsLoggingIn((prev) => !prev)}
+                    className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer"
                   >
-                    Review My Code Now <span aria-hidden="true">→</span>
+                    {isLoggingIn ? "Check The Example" : "Review My Code Now"}
+                    <span aria-hidden="true">→</span>
                   </a>
                 </div>
               </div>
@@ -136,30 +167,8 @@ export default function Hero() {
                 />
                 <div className="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0">
                   <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
-                    <div className="w-screen overflow-hidden rounded-tl-xl bg-gray-900">
-                      <div className="flex bg-gray-800/40 ring-1 ring-white/5">
-                        <div className="-mb-px flex text-sm font-medium leading-6 text-gray-400">
-                          {tabs.map((tab, index) => (
-                            <CodeTab
-                              isActive={activeTab === index}
-                              key={index}
-                              onClick={() => setActiveTab(index)}
-                              name={tab.name}
-                            />
-                          ))}
-                        </div>
-                      </div>
-                      <div className="px-6 pb-14 pt-6">
-                        <pre className="text-sm text-gray-300">
-                          <code>{tabs[activeTab].code}</code>
-                        </pre>
-                      </div>
-                    </div>
+                    {isLoggingIn ? children : <DemoScreen />}
                   </div>
-                  <div
-                    className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10 md:rounded-3xl"
-                    aria-hidden="true"
-                  />
                 </div>
               </div>
             </div>
